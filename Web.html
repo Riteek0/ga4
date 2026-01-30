@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrative by Dylogue | Tech-Led Growth</title>
+    <meta name="description" content="India’s First Tech-Led Media Growth Partner. We help founders build automated growth engines.">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-color: #050505;
+            --text-color: #f0f0f0;
+            --accent-color: #ccff00; /* Acid Green */
+            --border-color: #333;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace;
+            --padding-std: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            border: 1px solid var(--border-color);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .mono { font-family: var(--font-mono); letter-spacing: -0.5px; }
+        .uppercase { text-transform: uppercase; }
+        .border-bottom { border-bottom: 1px solid var(--border-color); }
+        .border-right { border-right: 1px solid var(--border-color); }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            border: 1px solid var(--text-color);
+            padding: 1rem 2rem;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--text-color);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+            box-shadow: 4px 4px 0px var(--text-color);
+            transform: translate(-2px, -2px);
+        }
+
+        /* --- HEADER / NAV --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            z-index: 100;
+        }
+
+        .logo {
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        nav ul { display: flex; height: 100%; }
+        
+        nav li {
+            border-left: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            width: fit-content;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 5rem;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 500px;
+            margin-bottom: 3rem;
+        }
+
+        /* Hero Image/Graphic Area */
+        .hero-visual {
+            background: radial-gradient(circle at center, #1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::after {
+            content: "DYLOGUE";
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            transform: rotate(-90deg);
+            position: absolute;
+        }
+
+        /* --- MARQUEE --- */
+        .marquee-container {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 1rem 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- SERVICES GRID --- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .service-card {
+            padding: 3rem;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+
+        .service-card:hover {
+            background: #111;
+        }
+
+        .service-card:hover h3 {
+            color: var(--accent-color);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* --- ABOUT / STATS --- */
+        .stats-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .stat-box {
+            padding: 4rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .stat-box:first-child { border-right: 1px solid var(--border-color); }
+
+        .stat-number {
+            font-size: 6rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-links a {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+        .footer-links a:hover { color: var(--accent-color); text-decoration: underline; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .hero, .services, .stats-section { grid-template-columns: 1fr; }
+            .hero-visual { height: 300px; border-top: 1px solid var(--border-color); border-right: none;}
+            .service-card { border-right: none; }
+            .stat-box { border-right: none; }
+            header { flex-direction: column; }
+            nav ul { border-top: 1px solid var(--border-color); width: 100%; justify-content: space-between;}
+            nav li { flex: 1; justify-content: center; border-left: none; border-right: 1px solid var(--border-color); }
+            nav li:last-child { border-right: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo uppercase">
+            Narrative<span>_</span> by Dylogue
+        </div>
+        <nav>
+            <ul class="mono">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge mono">EST. 2026 // INDIA</div>
+                <h1>INDIA’S FIRST <br><span style="color: var(--accent-color);">TECH-LED</span> MEDIA GROWTH PARTNER.</h1>
+                <p class="subtitle">
+                    We help founders build automated growth engines — where media, GTM, and execution operate as one unified system. This isn’t an agency. This is the future.
+                </p>
+                <div>
+                    <a href="#" class="btn">Start Your Engine &rarr;</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div style="width: 100px; height: 100px; border: 1px solid var(--accent-color); transform: rotate(45deg);"></div>
+            </div>
+        </section>
+
+        <section class="marquee-container">
+            <div class="marquee-content">
+                GROWTH AUTOMATION /// MEDIA STRATEGY /// NO-CODE EXECUTION /// REVENUE OPS /// FUTURE OF WORK /// GROWTH AUTOMATION /// MEDIA STRATEGY /// NO-CODE EXECUTION /// REVENUE OPS /// FUTURE OF WORK ///
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3 class="mono">Automated Engines</h3>
+                <p>We don't just run ads. We build self-sustaining systems that scale your outreach and conversion without manual input.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📡</div>
+                <h3 class="mono">Unified Media</h3>
+                <p>Aligning your content strategy with technical execution. Your media becomes a functional part of your funnel.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3 class="mono">GTM Execution</h3>
+                <p>Go-to-market strategies that leverage data science and AI, not just gut feeling and billboards.</p>
+            </div>
+        </section>
+
+        <section class="stats-section" id="about">
+            <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Tech-Led Strategy</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Guesswork</div>
+            </div>
+        </section>
+
+        <section style="padding: 6rem 2rem; text-align: center; border-bottom: 1px solid var(--border-color);">
+            <h2 style="font-size: 3rem; margin-bottom: 2rem; letter-spacing: -2px;">STOP RELYING ON LUCK.</h2>
+            <a href="#" class="btn">Book a Strategy Call</a>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div>
+            <div class="logo uppercase" style="padding-left: 0; margin-bottom: 1rem;">Dylogue.org</div>
+            <p class="mono" style="color: #666; max-width: 300px;">
+                Defining the narrative for the next generation of Indian startups.
+            </p>
+        </div>
+        <div class="footer-links mono">
+            <a href="#">Twitter / X</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Email Us</a>
+        </div>
+    </footer>
+
+</body>
+</html>
